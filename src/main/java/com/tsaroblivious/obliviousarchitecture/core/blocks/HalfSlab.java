@@ -5,6 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer.Builder;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -24,8 +25,41 @@ public class HalfSlab extends Block {
 	}
 
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext p_196258_1_) {
-		return this.defaultBlockState();
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		BlockPos pos = context.getClickedPos();
+		BlockState state = context.getLevel().getBlockState(pos);
+		if (state.is(this)) {
+			if (state.getValue(TYPE) == HalfSlabType.BOTTOM) {
+				return state.setValue(TYPE, HalfSlabType.DOUBLEBOTTOM);
+			} else {
+				return state.setValue(TYPE, HalfSlabType.DOUBLETOP);
+			}
+		} else {
+			Direction direction = context.getClickedFace();
+			if (direction == Direction.DOWN) {
+				return this.defaultBlockState().setValue(TYPE, HalfSlabType.TOP);
+			} else {
+				return this.defaultBlockState().setValue(TYPE, HalfSlabType.BOTTOM);
+			}
+		}
+	}
+
+	@Override
+	public boolean canBeReplaced(BlockState state, BlockItemUseContext context) {
+		if (context.getItemInHand().getItem() == this.asItem()
+				&& (state.getValue(TYPE) == HalfSlabType.BOTTOM || state.getValue(TYPE) == HalfSlabType.TOP)) {
+			if (context.replacingClickedOnBlock()) {
+				if (state.getValue(TYPE) == HalfSlabType.BOTTOM) {
+					return context.getClickedFace() == Direction.UP;
+				} else {
+					return context.getClickedFace() == Direction.DOWN;
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 
 	@Override

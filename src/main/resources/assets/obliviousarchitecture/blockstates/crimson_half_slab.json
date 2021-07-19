@@ -1,0 +1,16 @@
+{
+ "variants": {
+     "type=bottom": {
+      "model": "obliviousarchitecture:block/crimson_half_slab"
+},
+     "type=doublebottom": {
+      "model": "minecraft:block/crimson_slab"
+},
+     "type=doubletop": {
+      "model": "minecraft:block/crimson_slab_top"
+},
+     "type=top": {
+      "model": "obliviousarchitecture:block/crimson_half_slab_top"
+}
+  }
+}

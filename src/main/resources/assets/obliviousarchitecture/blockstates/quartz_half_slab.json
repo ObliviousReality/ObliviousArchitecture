@@ -1,0 +1,16 @@
+{
+ "variants": {
+     "type=bottom": {
+      "model": "obliviousarchitecture:block/quartz_half_slab"
+},
+     "type=doublebottom": {
+      "model": "minecraft:block/quartz_slab"
+},
+     "type=doubletop": {
+      "model": "minecraft:block/quartz_slab_top"
+},
+     "type=top": {
+      "model": "obliviousarchitecture:block/quartz_half_slab_top"
+}
+  }
+}

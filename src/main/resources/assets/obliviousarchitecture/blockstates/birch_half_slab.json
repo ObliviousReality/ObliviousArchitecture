@@ -1,0 +1,16 @@
+{
+ "variants": {
+     "type=bottom": {
+      "model": "obliviousarchitecture:block/birch_half_slab"
+},
+     "type=doublebottom": {
+      "model": "minecraft:block/birch_slab"
+},
+     "type=doubletop": {
+      "model": "minecraft:block/birch_slab_top"
+},
+     "type=top": {
+      "model": "obliviousarchitecture:block/birch_half_slab_top"
+}
+  }
+}

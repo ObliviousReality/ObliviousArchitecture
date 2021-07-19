@@ -1,0 +1,16 @@
+{
+ "variants": {
+     "type=bottom": {
+      "model": "obliviousarchitecture:block/sandstone_half_slab"
+},
+     "type=doublebottom": {
+      "model": "minecraft:block/sandstone_slab"
+},
+     "type=doubletop": {
+      "model": "minecraft:block/sandstone_slab_top"
+},
+     "type=top": {
+      "model": "obliviousarchitecture:block/sandstone_half_slab_top"
+}
+  }
+}

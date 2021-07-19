@@ -3,10 +3,10 @@ package com.tsaroblivious.obliviousarchitecture.core.blocks;
 import net.minecraft.util.IStringSerializable;
 
 public enum HalfSlabType implements IStringSerializable {
-   TOP("top"),
    BOTTOM("bottom"),
+   DOUBLEBOTTOM("doublebottom"),
    DOUBLETOP("doubletop"),
-   DOUBLEBOTTOM("doublebottom");
+   TOP("top");
 
    private final String name;
 

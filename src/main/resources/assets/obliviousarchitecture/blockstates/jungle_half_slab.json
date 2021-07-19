@@ -1,0 +1,16 @@
+{
+ "variants": {
+     "type=bottom": {
+      "model": "obliviousarchitecture:block/jungle_half_slab"
+},
+     "type=doublebottom": {
+      "model": "minecraft:block/jungle_slab"
+},
+     "type=doubletop": {
+      "model": "minecraft:block/jungle_slab_top"
+},
+     "type=top": {
+      "model": "obliviousarchitecture:block/jungle_half_slab_top"
+}
+  }
+}

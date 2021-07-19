@@ -1,0 +1,16 @@
+{
+ "variants": {
+     "type=bottom": {
+      "model": "obliviousarchitecture:block/mossy_cobblestone_half_slab"
+},
+     "type=doublebottom": {
+      "model": "minecraft:block/mossy_cobblestone_slab"
+},
+     "type=doubletop": {
+      "model": "minecraft:block/mossy_cobblestone_slab_top"
+},
+     "type=top": {
+      "model": "obliviousarchitecture:block/mossy_cobblestone_half_slab_top"
+}
+  }
+}
