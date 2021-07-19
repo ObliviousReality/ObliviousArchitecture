@@ -15,4 +15,7 @@ public class ItemInit {
 
 	public static final RegistryObject<Item> HAMMER = ITEMS.register("hammer", () -> new Item(
 			new Item.Properties().rarity(Rarity.RARE).tab(ObliviousArchitectureItemGroup.OBLIVIOUS_ARCHITECTURE)));
+
+	public static final RegistryObject<Item> SAW = ITEMS.register("saw", () -> new Item(
+			new Item.Properties().rarity(Rarity.RARE).tab(ObliviousArchitectureItemGroup.OBLIVIOUS_ARCHITECTURE)));
 }

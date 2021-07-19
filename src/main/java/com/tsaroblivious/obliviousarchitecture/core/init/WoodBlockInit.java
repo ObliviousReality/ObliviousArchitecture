@@ -8,25 +8,29 @@ import com.tsaroblivious.obliviousarchitecture.core.blocks.VerticalStairs;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class BlockInit {
+public class WoodBlockInit {
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
 			ObliviousArchitecture.MOD_ID);
+
+	public static RegistryObject<Block> OAK_VERTICAL_STAIRS = BLOCKS.register("oak_vertical_stairs",
+			() -> new VerticalStairs(AbstractBlock.Properties.copy(Blocks.OAK_STAIRS)));
 
 	public static void createVerticalStairs() {
 		ImmutableSet.of(Blocks.ACACIA_STAIRS, Blocks.ANDESITE_STAIRS, Blocks.BIRCH_STAIRS, Blocks.BRICK_STAIRS,
 				Blocks.COBBLESTONE_STAIRS, Blocks.DARK_OAK_STAIRS, Blocks.DARK_PRISMARINE_STAIRS, Blocks.DIORITE_STAIRS,
 				Blocks.END_STONE_BRICK_STAIRS, Blocks.GRANITE_STAIRS, Blocks.JUNGLE_STAIRS,
 				Blocks.MOSSY_COBBLESTONE_STAIRS, Blocks.MOSSY_STONE_BRICK_STAIRS, Blocks.NETHER_BRICK_STAIRS,
-				Blocks.OAK_STAIRS, Blocks.POLISHED_ANDESITE_STAIRS, Blocks.POLISHED_DIORITE_STAIRS,
-				Blocks.POLISHED_GRANITE_STAIRS, Blocks.PRISMARINE_STAIRS, Blocks.PRISMARINE_BRICK_STAIRS,
-				Blocks.PURPUR_STAIRS, Blocks.QUARTZ_STAIRS, Blocks.RED_NETHER_BRICK_STAIRS, Blocks.RED_SANDSTONE_STAIRS,
-				Blocks.SANDSTONE_STAIRS, Blocks.SMOOTH_QUARTZ_STAIRS, Blocks.SMOOTH_RED_SANDSTONE_STAIRS,
-				Blocks.SMOOTH_SANDSTONE_STAIRS, Blocks.SPRUCE_STAIRS, Blocks.STONE_STAIRS, Blocks.STONE_BRICK_STAIRS,
-				Blocks.BLACKSTONE_STAIRS, Blocks.POLISHED_BLACKSTONE_STAIRS, Blocks.POLISHED_BLACKSTONE_BRICK_STAIRS,
-				Blocks.CRIMSON_STAIRS, Blocks.WARPED_STAIRS).forEach(
+				Blocks.POLISHED_ANDESITE_STAIRS, Blocks.POLISHED_DIORITE_STAIRS, Blocks.POLISHED_GRANITE_STAIRS,
+				Blocks.PRISMARINE_STAIRS, Blocks.PRISMARINE_BRICK_STAIRS, Blocks.PURPUR_STAIRS, Blocks.QUARTZ_STAIRS,
+				Blocks.RED_NETHER_BRICK_STAIRS, Blocks.RED_SANDSTONE_STAIRS, Blocks.SANDSTONE_STAIRS,
+				Blocks.SMOOTH_QUARTZ_STAIRS, Blocks.SMOOTH_RED_SANDSTONE_STAIRS, Blocks.SMOOTH_SANDSTONE_STAIRS,
+				Blocks.SPRUCE_STAIRS, Blocks.STONE_STAIRS, Blocks.STONE_BRICK_STAIRS, Blocks.BLACKSTONE_STAIRS,
+				Blocks.POLISHED_BLACKSTONE_STAIRS, Blocks.POLISHED_BLACKSTONE_BRICK_STAIRS, Blocks.CRIMSON_STAIRS,
+				Blocks.WARPED_STAIRS).forEach(
 						b -> BLOCKS.register(
 								b.getRegistryName().getPath().replace("_stairs", "_vertical_stairs")
 										.replace("minecraft", "obliviousarchitecture"),

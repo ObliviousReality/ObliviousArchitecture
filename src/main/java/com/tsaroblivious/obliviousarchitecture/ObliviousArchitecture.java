@@ -3,8 +3,11 @@ package com.tsaroblivious.obliviousarchitecture;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.tsaroblivious.obliviousarchitecture.core.init.BlockInit;
 import com.tsaroblivious.obliviousarchitecture.core.init.ItemInit;
+import com.tsaroblivious.obliviousarchitecture.core.init.RegularBlockInit;
+import com.tsaroblivious.obliviousarchitecture.core.init.TileEntityInit;
+import com.tsaroblivious.obliviousarchitecture.core.init.WoodBlockInit;
+import com.tsaroblivious.obliviousarchitecture.core.itemgroup.ObliviousArchitectureBlockGroup;
 import com.tsaroblivious.obliviousarchitecture.core.itemgroup.ObliviousArchitectureItemGroup;
 
 import net.minecraft.item.BlockItem;
@@ -29,8 +32,10 @@ public class ObliviousArchitecture {
 	public ObliviousArchitecture() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-		BlockInit.createVerticalStairs();
-		BlockInit.BLOCKS.register(bus);
+		WoodBlockInit.createVerticalStairs();
+		WoodBlockInit.BLOCKS.register(bus);
+		RegularBlockInit.BLOCKS.register(bus);
+		TileEntityInit.TILE_ENTITIES.register(bus);
 		ItemInit.ITEMS.register(bus);
 
 		MinecraftForge.EVENT_BUS.register(this);
@@ -40,7 +45,13 @@ public class ObliviousArchitecture {
 
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
-		BlockInit.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
+		WoodBlockInit.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
+			event.getRegistry()
+					.register(new BlockItem(block,
+							new Item.Properties().tab(ObliviousArchitectureBlockGroup.OBLIVIOUS_ARCHITECTURE_BLOCKS))
+									.setRegistryName(block.getRegistryName()));
+		});
+		RegularBlockInit.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
 			event.getRegistry()
 					.register(new BlockItem(block,
 							new Item.Properties().tab(ObliviousArchitectureItemGroup.OBLIVIOUS_ARCHITECTURE))
@@ -48,6 +59,5 @@ public class ObliviousArchitecture {
 		});
 
 	}
-
 
 }
