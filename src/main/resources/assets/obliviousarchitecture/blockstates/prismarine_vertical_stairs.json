@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "obliviousarchitecture:block/prismarine_vertical_stairs",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "obliviousarchitecture:block/prismarine_vertical_stairs"
+    },
+    "facing=south": {
+      "model": "obliviousarchitecture:block/prismarine_vertical_stairs",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "obliviousarchitecture:block/prismarine_vertical_stairs",
+      "y": 270
+    }
+  }
+}
