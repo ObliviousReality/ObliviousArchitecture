@@ -1,0 +1,11 @@
+{
+	"type": "obliviousarchitecture:sawing_recipe",
+	"input": {
+		"item": "minecraft:birch_log"
+	},
+	"output": {
+		"item": "minecraft:birch_planks",
+		"count": 4
+	}
+	
+}

@@ -1,4 +1,4 @@
-package com.tsaroblivious.obliviousarchitecture.core.blocks;
+package com.tsaroblivious.obliviousarchitecture.common.enums;
 
 import net.minecraft.util.IStringSerializable;
 

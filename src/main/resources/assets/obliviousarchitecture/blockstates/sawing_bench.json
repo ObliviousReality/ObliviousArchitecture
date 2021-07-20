@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "obliviousarchitecture:block/sawing_bench"
+		},
+		"facing=south": {
+			"model": "obliviousarchitecture:block/sawing_bench",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "obliviousarchitecture:block/sawing_bench",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "obliviousarchitecture:block/sawing_bench",
+			"y": 90
+		}
+	}
+}

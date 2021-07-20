@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.tsaroblivious.obliviousarchitecture.core.init.ItemInit;
+import com.tsaroblivious.obliviousarchitecture.core.init.RecipeInit;
 import com.tsaroblivious.obliviousarchitecture.core.init.RegularBlockInit;
 import com.tsaroblivious.obliviousarchitecture.core.init.TileEntityInit;
 import com.tsaroblivious.obliviousarchitecture.core.init.WoodBlockInit;
@@ -12,6 +13,7 @@ import com.tsaroblivious.obliviousarchitecture.core.itemgroup.ObliviousArchitect
 
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -31,6 +33,8 @@ public class ObliviousArchitecture {
 
 	public ObliviousArchitecture() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+		
+		bus.addGenericListener(IRecipeSerializer.class, RecipeInit::registerRecipes);
 
 		WoodBlockInit.createVerticalStairs();
 		WoodBlockInit.BLOCKS.register(bus);

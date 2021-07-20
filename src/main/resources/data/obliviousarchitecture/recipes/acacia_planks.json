@@ -1,0 +1,11 @@
+{
+	"type": "obliviousarchitecture:sawing_recipe",
+	"input": {
+		"item": "minecraft:acacia_log"
+	},
+	"output": {
+		"item": "minecraft:acacia_planks",
+		"count": 4
+	}
+	
+}

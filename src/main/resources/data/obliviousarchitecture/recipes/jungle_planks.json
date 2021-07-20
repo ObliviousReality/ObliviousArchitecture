@@ -1,0 +1,11 @@
+{
+	"type": "obliviousarchitecture:sawing_recipe",
+	"input": {
+		"item": "minecraft:jungle_log"
+	},
+	"output": {
+		"item": "minecraft:jungle_planks",
+		"count": 4
+	}
+	
+}

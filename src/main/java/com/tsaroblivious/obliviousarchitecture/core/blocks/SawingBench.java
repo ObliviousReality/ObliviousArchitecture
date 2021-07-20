@@ -2,27 +2,39 @@ package com.tsaroblivious.obliviousarchitecture.core.blocks;
 
 import java.util.Arrays;
 
+import com.tsaroblivious.obliviousarchitecture.common.recipe.SawingRecipe;
 import com.tsaroblivious.obliviousarchitecture.common.te.SawingBenchTileEntity;
+import com.tsaroblivious.obliviousarchitecture.core.init.ItemInit;
+import com.tsaroblivious.obliviousarchitecture.core.init.RecipeInit;
 import com.tsaroblivious.obliviousarchitecture.core.init.TileEntityInit;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.IBooleanFunction;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -30,12 +42,25 @@ public class SawingBench extends Block {
 
 	public static final BooleanProperty HASBLOCK = BooleanProperty.create("hasblock");
 	public static final IntegerProperty BLOCKLEVEL = IntegerProperty.create("blocklevel", 0, 8);
+	public static final DirectionProperty FACING = HorizontalBlock.FACING;
 
 	private static final Item[] LOGS = { Items.OAK_LOG, Items.JUNGLE_LOG, Items.SPRUCE_LOG, Items.BIRCH_LOG,
 			Items.DARK_OAK_LOG, Items.ACACIA_LOG };
 
 	private static final Item[] PLANKS = { Items.OAK_PLANKS, Items.JUNGLE_PLANKS, Items.SPRUCE_PLANKS,
 			Items.BIRCH_PLANKS, Items.DARK_OAK_PLANKS, Items.ACACIA_PLANKS };
+
+	private static final VoxelShape SHAPE_N = VoxelShapes.joinUnoptimized(Block.box(0, 14, 3, 16, 15, 13),
+			Block.box(3, 0, 3, 13, 14, 13), IBooleanFunction.OR);
+
+	private static final VoxelShape SHAPE_E = VoxelShapes.joinUnoptimized(Block.box(3, 14, 0, 13, 15, 16),
+			Block.box(3, 0, 3, 13, 14, 13), IBooleanFunction.OR);
+
+	private static final VoxelShape SHAPE_S = VoxelShapes.joinUnoptimized(Block.box(0, 14, 3, 16, 15, 13),
+			Block.box(3, 0, 3, 13, 14, 13), IBooleanFunction.OR);
+
+	private static final VoxelShape SHAPE_W = VoxelShapes.joinUnoptimized(Block.box(3, 14, 0, 13, 15, 16),
+			Block.box(3, 0, 3, 13, 14, 13), IBooleanFunction.OR);
 
 	public SawingBench() {
 		super(AbstractBlock.Properties.copy(Blocks.STONECUTTER));
@@ -47,8 +72,17 @@ public class SawingBench extends Block {
 			BlockRayTraceResult brtr) {
 		TileEntity te = world.getBlockEntity(pos);
 		if (te instanceof SawingBenchTileEntity) {
-			if (state.getValue(HASBLOCK)) {
-				((SawingBenchTileEntity) te).outputSlotItem();
+			if (state.getValue(HASBLOCK) && player.getItemInHand(hand).sameItem(new ItemStack(ItemInit.SAW.get()))) {
+				SawingBenchTileEntity te2 = (SawingBenchTileEntity) te;
+				ItemStack held = te2.getSlot();
+				for (final IRecipe<?> recipe : world.getRecipeManager().getAllRecipesFor(RecipeInit.SAWING_RECIPE)) {
+					final SawingRecipe sawingRecipe = (SawingRecipe) recipe;
+					if (sawingRecipe.isValid(held)) {
+						dropItem(world, pos, recipe.getResultItem().copy());
+						// SOUND!
+						te2.clearSlot();
+					}
+				}
 			} else {
 				if (Arrays.asList(PLANKS).contains(player.getItemInHand(hand).getItem())
 						|| Arrays.asList(LOGS).contains(player.getItemInHand(hand).getItem())) {
@@ -75,30 +109,65 @@ public class SawingBench extends Block {
 			if (state.getValue(HASBLOCK)) {
 				if (!world.isClientSide) {
 					SawingBenchTileEntity te2 = (SawingBenchTileEntity) te;
-					double d0 = (double) (world.random.nextFloat() * 0.7F) + (double) 0.15F;
-					double d1 = (double) (world.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
-					double d2 = (double) (world.random.nextFloat() * 0.7F) + (double) 0.15F;
-					ItemStack itemstack = te2.getItem();
-					ItemEntity itementity = new ItemEntity(world, (double) pos.getX() + d0, (double) pos.getY() + d1,
-							(double) pos.getZ() + d2, itemstack);
-					itementity.setDefaultPickUpDelay();
-					world.addFreshEntity(itementity);
-					te2.clearItem();
+					ItemStack itemstack = te2.getSlot();
+					dropItem(world, pos, itemstack);
+					te2.clearSlot();
 				}
 			}
 		}
 		super.playerDestroy(world, player, pos, state, te, itemStack);
 	}
 
+	private void dropItem(World world, BlockPos pos, ItemStack item) {
+		double d0 = (double) (world.random.nextFloat() * 0.7F) + (double) 0.15F;
+		double d1 = (double) (world.random.nextFloat() * 0.7F) + (double) 0.060000002F + 0.6D;
+		double d2 = (double) (world.random.nextFloat() * 0.7F) + (double) 0.15F;
+
+		ItemEntity itementity = new ItemEntity(world, (double) pos.getX() + d0, (double) pos.getY() + d1,
+				(double) pos.getZ() + d2, item);
+		itementity.setDefaultPickUpDelay();
+		world.addFreshEntity(itementity);
+
+	}
+
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.defaultBlockState().setValue(HASBLOCK, false).setValue(BLOCKLEVEL, 0);
+		return this.defaultBlockState().setValue(HASBLOCK, false).setValue(BLOCKLEVEL, 0).setValue(FACING,
+				context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
 	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
 		builder.add(HASBLOCK);
 		builder.add(BLOCKLEVEL);
+		builder.add(FACING);
+	}
+
+	@Override
+	public BlockState rotate(BlockState state, Rotation rot) {
+		return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public BlockState mirror(BlockState state, Mirror mirror) {
+		return state.rotate(mirror.getRotation(state.getValue(FACING)));
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext p_220053_4_) {
+		switch (state.getValue(FACING)) {
+		case EAST:
+			return SHAPE_E;
+		case NORTH:
+			return SHAPE_N;
+		case SOUTH:
+			return SHAPE_S;
+		case WEST:
+			return SHAPE_W;
+		default:
+			return SHAPE_N;
+		}
 	}
 
 	@Override

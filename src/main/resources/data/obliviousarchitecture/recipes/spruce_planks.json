@@ -1,0 +1,11 @@
+{
+	"type": "obliviousarchitecture:sawing_recipe",
+	"input": {
+		"item": "minecraft:spruce_log"
+	},
+	"output": {
+		"item": "minecraft:spruce_planks",
+		"count": 4
+	}
+	
+}

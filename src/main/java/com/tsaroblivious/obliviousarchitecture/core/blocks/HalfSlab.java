@@ -1,5 +1,7 @@
 package com.tsaroblivious.obliviousarchitecture.core.blocks;
 
+import com.tsaroblivious.obliviousarchitecture.common.enums.HalfSlabType;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
