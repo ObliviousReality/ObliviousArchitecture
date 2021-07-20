@@ -4,6 +4,8 @@
 	"itemGroup.obliviousarchitecture": "Oblivious Architecture",
 	"itemGroup.obliviousarchitectureblocks": "Oblivious Architecture Blocks",
 	
+	"category.obliviousarchitecture.sawing_recipe": "Sawing",
+	
 	"block.obliviousarchitecture.acacia_half_slab": "Acacia Half Slab",
 	"item.obliviousarchitecture.acacia_half_slab": "Acacia Half Slab",
 	"block.obliviousarchitecture.andesite_half_slab": "Andesite Half Slab",

@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.tsaroblivious.obliviousarchitecture.ObliviousArchitecture;
 import com.tsaroblivious.obliviousarchitecture.core.init.ItemInit;
 import com.tsaroblivious.obliviousarchitecture.core.init.RecipeInit;
+import com.tsaroblivious.obliviousarchitecture.core.init.RegularBlockInit;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -15,6 +16,7 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipe;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -71,10 +73,19 @@ public class SawingRecipe implements IRecipe<IInventory> {
 	public boolean isValid(ItemStack input) {
 		return this.input.test(input);
 	}
-	
+
 	@Override
 	public boolean canCraftInDimensions(int p_194133_1_, int p_194133_2_) {
 		return true;
+	}
+
+	@Override
+	public NonNullList<Ingredient> getIngredients() {
+		NonNullList<Ingredient> i = NonNullList.create();
+		i.add(input);
+		i.add(Ingredient.of(new ItemStack(ItemInit.SAW.get())));
+		i.add(Ingredient.of(new ItemStack(RegularBlockInit.SAWING_BENCH.get())));
+		return i;
 	}
 
 	private static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>>
