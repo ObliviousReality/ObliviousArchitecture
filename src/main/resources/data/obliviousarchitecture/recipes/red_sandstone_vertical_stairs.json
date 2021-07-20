@@ -1,0 +1,11 @@
+{
+"type": "minecraft:crafting_shapeless",
+"ingredients": [
+{
+"item": "minecraft:red_sandstone_stairs"
+}
+],
+"result": {
+"item": "obliviousarchitecture:red_sandstone_vertical_stairs"
+}
+}

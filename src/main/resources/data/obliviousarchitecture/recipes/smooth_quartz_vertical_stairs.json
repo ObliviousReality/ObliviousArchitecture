@@ -1,0 +1,11 @@
+{
+"type": "minecraft:crafting_shapeless",
+"ingredients": [
+{
+"item": "minecraft:smooth_quartz_stairs"
+}
+],
+"result": {
+"item": "obliviousarchitecture:smooth_quartz_vertical_stairs"
+}
+}

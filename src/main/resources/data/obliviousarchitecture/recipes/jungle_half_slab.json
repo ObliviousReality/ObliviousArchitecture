@@ -1,0 +1,9 @@
+{
+"type": "obliviousarchitecture:sawing_recipe",
+"input": {
+"item": "minecraft:jungle_slab"
+},
+"output": {
+"item": "obliviousarchitecture:jungle_half_slab",
+"count": 2}
+}

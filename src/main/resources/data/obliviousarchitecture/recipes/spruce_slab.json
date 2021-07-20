@@ -1,0 +1,9 @@
+{
+"type": "obliviousarchitecture:sawing_recipe",
+"input": {
+"item": "minecraft:spruce_planks"
+},
+"output": {
+"item": "minecraft:spruce_slab",
+"count": 2}
+}

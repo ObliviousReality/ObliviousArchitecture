@@ -1,0 +1,9 @@
+{
+"type": "obliviousarchitecture:sawing_recipe",
+"input": {
+"item": "minecraft:dark_oak_planks"
+},
+"output": {
+"item": "minecraft:dark_oak_slab",
+"count": 2}
+}

@@ -1,0 +1,9 @@
+{
+"type": "obliviousarchitecture:sawing_recipe",
+"input": {
+"item": "minecraft:acacia_slab"
+},
+"output": {
+"item": "obliviousarchitecture:acacia_half_slab",
+"count": 2}
+}

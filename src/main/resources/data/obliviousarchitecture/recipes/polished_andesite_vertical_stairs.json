@@ -1,0 +1,11 @@
+{
+"type": "minecraft:crafting_shapeless",
+"ingredients": [
+{
+"item": "minecraft:polished_andesite_stairs"
+}
+],
+"result": {
+"item": "obliviousarchitecture:polished_andesite_vertical_stairs"
+}
+}
