@@ -5,7 +5,7 @@ import java.util.Map;
 import com.tsaroblivious.obliviousarchitecture.common.recipe.SawingRecipe;
 import com.tsaroblivious.obliviousarchitecture.common.recipe.SawingRecipeType;
 
-import mezz.jei.recipes.RecipeManager;
+import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;

@@ -1,6 +1,7 @@
 package com.tsaroblivious.obliviousarchitecture.core.init;
 
 import com.tsaroblivious.obliviousarchitecture.ObliviousArchitecture;
+import com.tsaroblivious.obliviousarchitecture.core.blocks.ArchitectAnvil;
 import com.tsaroblivious.obliviousarchitecture.core.blocks.SawingBench;
 
 import net.minecraft.block.Block;
@@ -13,4 +14,6 @@ public class RegularBlockInit {
 			ObliviousArchitecture.MOD_ID);
 
 	public static RegistryObject<Block> SAWING_BENCH = BLOCKS.register("sawing_bench", () -> new SawingBench());
+	
+	public static RegistryObject<Block> ANVIL = BLOCKS.register("architect_anvil", () -> new ArchitectAnvil());
 }

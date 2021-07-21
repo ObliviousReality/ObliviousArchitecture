@@ -1,6 +1,7 @@
 package com.tsaroblivious.obliviousarchitecture.core.init;
 
 import com.tsaroblivious.obliviousarchitecture.ObliviousArchitecture;
+import com.tsaroblivious.obliviousarchitecture.common.te.AnvilTileEntity;
 import com.tsaroblivious.obliviousarchitecture.common.te.SawingBenchTileEntity;
 
 import net.minecraft.tileentity.TileEntityType;
@@ -16,5 +17,8 @@ public class TileEntityInit {
 	public static final RegistryObject<TileEntityType<SawingBenchTileEntity>> SAWINGBENCH_TILE_ENTITY = TILE_ENTITIES
 			.register("sawing_bench", () -> TileEntityType.Builder
 					.of(SawingBenchTileEntity::new, RegularBlockInit.SAWING_BENCH.get()).build(null));
+
+	public static final RegistryObject<TileEntityType<AnvilTileEntity>> ANVIL_TILE_ENTITY = TILE_ENTITIES.register(
+			"anvil", () -> TileEntityType.Builder.of(AnvilTileEntity::new, RegularBlockInit.ANVIL.get()).build(null));
 
 }
