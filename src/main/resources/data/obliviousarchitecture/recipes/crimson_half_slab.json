@@ -1,0 +1,9 @@
+{
+"type": "obliviousarchitecture:sawing_recipe",
+"input": {
+"item": "minecraft:crimson_slab"
+},
+"output": {
+"item": "obliviousarchitecture:crimson_half_slab",
+"count": 2}
+}

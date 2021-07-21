@@ -1,0 +1,9 @@
+{
+"type": "obliviousarchitecture:sawing_recipe",
+"input": {
+"item": "minecraft:warped_slab"
+},
+"output": {
+"item": "obliviousarchitecture:warped_half_slab",
+"count": 2}
+}

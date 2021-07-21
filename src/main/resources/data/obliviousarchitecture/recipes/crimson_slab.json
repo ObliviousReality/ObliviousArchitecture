@@ -1,0 +1,9 @@
+{
+"type": "obliviousarchitecture:sawing_recipe",
+"input": {
+"item": "minecraft:crimson_planks"
+},
+"output": {
+"item": "minecraft:crimson_slab",
+"count": 2}
+}

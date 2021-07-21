@@ -1,9 +1,11 @@
 {
 	"texture_size": [64, 64],
+	"parent": "block/cube_all",
 	"textures": {
 		"0": "obliviousarchitecture:block/sawing_bench",
 		"particle": "obliviousarchitecture:block/sawing_bench"
 	},
+	
 	"elements": [
 		{
 			"from": [0, 14, 3],
@@ -96,7 +98,6 @@
 			}
 		}
 	],
-	"display": {},
 	"groups": [
 		{
 			"name": "VoxelShapes",

@@ -5,6 +5,7 @@ import com.tsaroblivious.obliviousarchitecture.core.init.TileEntityInit;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
@@ -13,7 +14,7 @@ import net.minecraft.tileentity.TileEntityType;
 
 public class SawingBenchTileEntity extends TileEntity {
 
-	private ItemStack slot = ItemStack.EMPTY;
+	private ItemStack slot = new ItemStack(Items.AIR, 1);
 
 	public SawingBenchTileEntity(TileEntityType<?> p_i48289_1_) {
 		super(p_i48289_1_);
@@ -49,7 +50,7 @@ public class SawingBenchTileEntity extends TileEntity {
 	}
 
 	public void clearSlot() {
-		slot = ItemStack.EMPTY;
+		slot = new ItemStack(Items.AIR, 1);
 	}
 
 	public ItemStack getSlot() {

@@ -1,7 +1,5 @@
 package com.tsaroblivious.obliviousarchitecture.core.blocks;
 
-import java.util.Arrays;
-
 import com.tsaroblivious.obliviousarchitecture.common.recipe.SawingRecipe;
 import com.tsaroblivious.obliviousarchitecture.common.te.SawingBenchTileEntity;
 import com.tsaroblivious.obliviousarchitecture.core.init.ItemInit;
@@ -16,13 +14,11 @@ import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -41,14 +37,7 @@ import net.minecraft.world.World;
 public class SawingBench extends Block {
 
 	public static final BooleanProperty HASBLOCK = BooleanProperty.create("hasblock");
-	public static final IntegerProperty BLOCKLEVEL = IntegerProperty.create("blocklevel", 0, 8);
 	public static final DirectionProperty FACING = HorizontalBlock.FACING;
-
-	private static final Item[] LOGS = { Items.OAK_LOG, Items.JUNGLE_LOG, Items.SPRUCE_LOG, Items.BIRCH_LOG,
-			Items.DARK_OAK_LOG, Items.ACACIA_LOG };
-
-	private static final Item[] PLANKS = { Items.OAK_PLANKS, Items.JUNGLE_PLANKS, Items.SPRUCE_PLANKS,
-			Items.BIRCH_PLANKS, Items.DARK_OAK_PLANKS, Items.ACACIA_PLANKS };
 
 	private static final VoxelShape SHAPE_N = VoxelShapes.joinUnoptimized(Block.box(0, 14, 3, 16, 15, 13),
 			Block.box(3, 0, 3, 13, 14, 13), IBooleanFunction.OR);
@@ -64,7 +53,7 @@ public class SawingBench extends Block {
 
 	public SawingBench() {
 		super(AbstractBlock.Properties.copy(Blocks.STONECUTTER));
-		this.registerDefaultState(this.stateDefinition.any().setValue(HASBLOCK, false).setValue(BLOCKLEVEL, 0));
+		this.registerDefaultState(this.stateDefinition.any().setValue(HASBLOCK, false));
 	}
 
 	@Override
@@ -79,13 +68,26 @@ public class SawingBench extends Block {
 					final SawingRecipe sawingRecipe = (SawingRecipe) recipe;
 					if (sawingRecipe.isValid(held)) {
 						dropItem(world, pos, recipe.getResultItem().copy());
-						// SOUND!
+						player.getItemInHand(hand).setDamageValue(player.getItemInHand(hand).getDamageValue() + 1);
+//						world.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_FRAME_BREAK, SoundCategory.BLOCKS, 1, 1);
 						te2.clearSlot();
+						if (!world.isClientSide) {
+							world.setBlock(pos, state.setValue(HASBLOCK, false), 3);
+						}
 					}
 				}
+				return ActionResultType.sidedSuccess(world.isClientSide);
+			} else if (state.getValue(HASBLOCK)) {
+				SawingBenchTileEntity te2 = (SawingBenchTileEntity) te;
+				ItemStack held = te2.getSlot();
+				dropItem(world, pos, held);
+				te2.clearSlot();
+				if (!world.isClientSide) {
+					world.setBlock(pos, state.setValue(HASBLOCK, false), 2);
+				}
+				return ActionResultType.sidedSuccess(world.isClientSide);
 			} else {
-				if (Arrays.asList(PLANKS).contains(player.getItemInHand(hand).getItem())
-						|| Arrays.asList(LOGS).contains(player.getItemInHand(hand).getItem())) {
+				if (!player.getItemInHand(hand).sameItem(new ItemStack(Items.AIR, 1))) {
 					ItemStack item = new ItemStack(player.getItemInHand(hand).getItem(), 1);
 					((SawingBenchTileEntity) te).setSlot(item);
 					if (!world.isClientSide) {
@@ -132,14 +134,13 @@ public class SawingBench extends Block {
 
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context) {
-		return this.defaultBlockState().setValue(HASBLOCK, false).setValue(BLOCKLEVEL, 0).setValue(FACING,
+		return this.defaultBlockState().setValue(HASBLOCK, false).setValue(FACING,
 				context.getHorizontalDirection().getOpposite());
 	}
 
 	@Override
 	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
 		builder.add(HASBLOCK);
-		builder.add(BLOCKLEVEL);
 		builder.add(FACING);
 	}
 

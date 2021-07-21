@@ -1,5 +1,9 @@
 {
 	"item.obliviousarchitecture.hammer": "Architect's Hammer",
+	"item.obliviousarchitecture.saw": "Saw",
+	
+	"block.obliviousarchitecture.sawing_bench": "Sawing Bench",
+	"item.obliviousarchitecture.sawing_bench": "Sawing Bench",
 	
 	"itemGroup.obliviousarchitecture": "Oblivious Architecture",
 	"itemGroup.obliviousarchitectureblocks": "Oblivious Architecture Blocks",
