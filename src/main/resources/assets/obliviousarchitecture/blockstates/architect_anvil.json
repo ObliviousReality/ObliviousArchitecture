@@ -1,0 +1,19 @@
+{
+	"variants": {
+		"facing=north": {
+			"model": "obliviousarchitecture:block/architect_anvil",
+			"y": 90
+		},
+		"facing=south": {
+			"model": "obliviousarchitecture:block/architect_anvil",
+			"y": 270
+		},
+		"facing=west": {
+			"model": "obliviousarchitecture:block/architect_anvil"
+		},
+		"facing=east": {
+			"model": "obliviousarchitecture:block/architect_anvil",
+			"y": 180
+		}
+	}
+}

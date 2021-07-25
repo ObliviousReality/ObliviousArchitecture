@@ -1,7 +1,7 @@
 package com.tsaroblivious.obliviousarchitecture.common.jei;
 
 import com.tsaroblivious.obliviousarchitecture.ObliviousArchitecture;
-import com.tsaroblivious.obliviousarchitecture.common.recipe.SawingRecipe;
+import com.tsaroblivious.obliviousarchitecture.common.recipe.HammeringRecipe;
 import com.tsaroblivious.obliviousarchitecture.core.init.RegularBlockInit;
 
 import mezz.jei.api.constants.VanillaTypes;
@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class ArchitectAnvilRecipeCategory implements IRecipeCategory<SawingRecipe> {
+public class HammeringRecipeCategory implements IRecipeCategory<HammeringRecipe> {
 
 	public static final ResourceLocation ID = new ResourceLocation(ObliviousArchitecture.MOD_ID,
 			".architect_anvil_recipe_category");
@@ -23,9 +23,9 @@ public class ArchitectAnvilRecipeCategory implements IRecipeCategory<SawingRecip
 	private final IDrawable back;
 	private final IDrawable icon;
 
-	public ArchitectAnvilRecipeCategory(IGuiHelper helper) {
+	public HammeringRecipeCategory(IGuiHelper helper) {
 		this.back = helper.drawableBuilder(
-				new ResourceLocation(ObliviousArchitecture.MOD_ID, "textures/gui/anvil_recipe_back.png"), 0, 0, 125, 38)
+				new ResourceLocation(ObliviousArchitecture.MOD_ID, "textures/gui/hammering_recipe_back.png"), 0, 0, 152, 38)
 				.addPadding(0, 0, 0, 0).build();
 		this.icon = helper.createDrawableIngredient(new ItemStack(RegularBlockInit.ANVIL.get()));
 	}
@@ -36,8 +36,8 @@ public class ArchitectAnvilRecipeCategory implements IRecipeCategory<SawingRecip
 	}
 
 	@Override
-	public Class<? extends SawingRecipe> getRecipeClass() {
-		return SawingRecipe.class;
+	public Class<? extends HammeringRecipe> getRecipeClass() {
+		return HammeringRecipe.class;
 	}
 
 	@Override
@@ -56,20 +56,21 @@ public class ArchitectAnvilRecipeCategory implements IRecipeCategory<SawingRecip
 	}
 
 	@Override
-	public void setIngredients(SawingRecipe recipe, IIngredients ingredients) {
+	public void setIngredients(HammeringRecipe recipe, IIngredients ingredients) {
 		ingredients.setInputIngredients(recipe.getIngredients());
 		ingredients.setOutput(VanillaTypes.ITEM, recipe.getResultItem());
 
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, SawingRecipe recipe, IIngredients ingredients) {
+	public void setRecipe(IRecipeLayout recipeLayout, HammeringRecipe recipe, IIngredients ingredients) {
 		IGuiItemStackGroup itemStackGroup = recipeLayout.getItemStacks();
 
 		itemStackGroup.init(0, true, 0, 0); // Input
-		itemStackGroup.init(1, true, 49, 0); // Saw
-		itemStackGroup.init(2, true, 0, 20); // Block
-		itemStackGroup.init(3, false, 107, 0); // Output
+		itemStackGroup.init(1, true, 27, 0); // Input 2
+		itemStackGroup.init(2, true, 76, 0); // Hammer
+		itemStackGroup.init(3, true, 13, 20); // Block
+		itemStackGroup.init(4, false, 134, 0); // Output
 		itemStackGroup.set(ingredients);
 	}
 

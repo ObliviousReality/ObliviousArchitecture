@@ -30,16 +30,19 @@ public class JEIPlugin implements IModPlugin {
 	public void registerRecipes(IRecipeRegistration registration) {
 		net.minecraft.item.crafting.RecipeManager manager = Minecraft.getInstance().level.getRecipeManager();
 		registration.addRecipes(getRecipes(manager, RecipeInit.SAWING_RECIPE), SawingRecipeCategory.ID);
+		registration.addRecipes(getRecipes(manager, RecipeInit.HAMMERING_RECIPE), HammeringRecipeCategory.ID);
 	}
 
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registration) {
 		IGuiHelper helper = registration.getJeiHelpers().getGuiHelper();
 		registration.addRecipeCategories(new SawingRecipeCategory(helper));
+		registration.addRecipeCategories(new HammeringRecipeCategory(helper));
 	}
 
 	private static Collection<?> getRecipes(net.minecraft.item.crafting.RecipeManager manager, IRecipeType<?> type) {
-		return manager.getRecipes().parallelStream().filter(recipe -> recipe.getType() == type).collect(Collectors.toList());
+		return manager.getRecipes().parallelStream().filter(recipe -> recipe.getType() == type)
+				.collect(Collectors.toList());
 	}
 
 }

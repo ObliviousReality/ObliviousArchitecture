@@ -1,6 +1,6 @@
 package com.tsaroblivious.obliviousarchitecture.core.itemgroup;
 
-import com.tsaroblivious.obliviousarchitecture.core.init.WoodBlockInit;
+import com.tsaroblivious.obliviousarchitecture.core.init.VariantBlockInit;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -15,6 +15,6 @@ public class ObliviousArchitectureBlockGroup extends ItemGroup {
 
 	@Override
 	public ItemStack makeIcon() {
-		return new ItemStack(WoodBlockInit.OAK_VERTICAL_STAIRS.get());
+		return new ItemStack(VariantBlockInit.OAK_VERTICAL_STAIRS.get());
 	}
 }

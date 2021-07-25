@@ -1,0 +1,14 @@
+{
+	"type": "obliviousarchitecture:hammering_recipe",
+	"input": {
+		"item": "minecraft:iron_ingot"
+	},
+	"input2": {
+		"item": "minecraft:iron_ingot"
+	},
+	"output": {
+		"item": "minecraft:iron_ingot",
+		"count": 4
+	}
+	
+}

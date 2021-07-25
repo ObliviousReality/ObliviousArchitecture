@@ -2,13 +2,15 @@ package com.tsaroblivious.obliviousarchitecture.core.init;
 
 import java.util.Map;
 
+import com.tsaroblivious.obliviousarchitecture.common.recipe.HammeringRecipe;
+import com.tsaroblivious.obliviousarchitecture.common.recipe.HammeringRecipeType;
 import com.tsaroblivious.obliviousarchitecture.common.recipe.SawingRecipe;
 import com.tsaroblivious.obliviousarchitecture.common.recipe.SawingRecipeType;
 
-import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.IRecipeType;
+import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -17,9 +19,11 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 public class RecipeInit {
 
 	public static final IRecipeType<SawingRecipe> SAWING_RECIPE = new SawingRecipeType();
+	public static final IRecipeType<HammeringRecipe> HAMMERING_RECIPE = new HammeringRecipeType();
 
 	public static void registerRecipes(Register<IRecipeSerializer<?>> event) {
 		registerRecipe(event, SAWING_RECIPE, SawingRecipe.SERIALIZER);
+		registerRecipe(event, HAMMERING_RECIPE, HammeringRecipe.SERIALIZER);
 	}
 
 	private static void registerRecipe(Register<IRecipeSerializer<?>> event, IRecipeType<?> type,

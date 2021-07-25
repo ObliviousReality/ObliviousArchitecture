@@ -7,7 +7,7 @@ import com.tsaroblivious.obliviousarchitecture.core.init.ItemInit;
 import com.tsaroblivious.obliviousarchitecture.core.init.RecipeInit;
 import com.tsaroblivious.obliviousarchitecture.core.init.RegularBlockInit;
 import com.tsaroblivious.obliviousarchitecture.core.init.TileEntityInit;
-import com.tsaroblivious.obliviousarchitecture.core.init.WoodBlockInit;
+import com.tsaroblivious.obliviousarchitecture.core.init.VariantBlockInit;
 import com.tsaroblivious.obliviousarchitecture.core.itemgroup.ObliviousArchitectureBlockGroup;
 import com.tsaroblivious.obliviousarchitecture.core.itemgroup.ObliviousArchitectureItemGroup;
 
@@ -36,8 +36,8 @@ public class ObliviousArchitecture {
 		
 		bus.addGenericListener(IRecipeSerializer.class, RecipeInit::registerRecipes);
 
-		WoodBlockInit.createVerticalStairs();
-		WoodBlockInit.BLOCKS.register(bus);
+		VariantBlockInit.createVerticalStairs();
+		VariantBlockInit.BLOCKS.register(bus);
 		RegularBlockInit.BLOCKS.register(bus);
 		TileEntityInit.TILE_ENTITIES.register(bus);
 		ItemInit.ITEMS.register(bus);
@@ -49,7 +49,7 @@ public class ObliviousArchitecture {
 
 	@SubscribeEvent
 	public static void onRegisterItems(final RegistryEvent.Register<Item> event) {
-		WoodBlockInit.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
+		VariantBlockInit.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
 			event.getRegistry()
 					.register(new BlockItem(block,
 							new Item.Properties().tab(ObliviousArchitectureBlockGroup.OBLIVIOUS_ARCHITECTURE_BLOCKS))
